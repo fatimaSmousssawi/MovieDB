@@ -3,6 +3,13 @@ const app = express()
 const port = 8000
 let date_ob=new Date();
 
+const movies = [
+    { title: 'Jaws', year: 1975, rating: 8 },
+    { title: 'Avatar', year: 2009, rating: 7.8 },
+    { title: 'Brazil', year: 1985, rating: 8 },
+    { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
+]
+
 // current hours
 let hours = date_ob.getHours();
 
@@ -26,22 +33,23 @@ app.get('/time',(req, res) =>{
 })
 
 
-// a middleware sub-stack that handles GET requests to the /user/:id path
+
 app.get('/hello/:id?', function (req, res) {
-  // if the user ID is 0, skip to the next router
+  
   if (req.params.id){
   res.send("{status:200, message:Hello,"+req.params.id+"}")}
   else {
-  // render a regular page
+  
   res.send("{status:200, message:Hello }")
 }})
-//
-// a middleware sub-stack that handles GET requests to the /user/:id path
+
 app.get('/search=:s?', function (req, res) {
-  // if the user ID is 0, skip to the next router
+
   if (req.params.s){
   res.send('{status:200, message:"ok",data:'+req.params.s+'}')}
   else {
-  // render a regular page
+  
   res.send('{status:500, error:true, message:"you have to provide a search"}')
 }})
+
+
