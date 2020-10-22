@@ -35,7 +35,7 @@ app.get('/hello/:id?', function (req, res) {
   // render a regular page
   res.send("{status:200, message:Hello }")
 }})
-
+//
 // a middleware sub-stack that handles GET requests to the /user/:id path
 app.get('/search=:s?', function (req, res) {
   // if the user ID is 0, skip to the next router
