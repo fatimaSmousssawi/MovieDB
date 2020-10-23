@@ -204,3 +204,8 @@ app.get('/movies/read/id/:id?', (req, res) => {
   
   
   });
+
+
+  -----------
+
+  http://localhost:8000/movies/add/title=khalilk&year=1999&rating=

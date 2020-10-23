@@ -51,6 +51,20 @@ app.get('/search=:s?', function (req, res) {
 
   res.send('{status:500, error:true, message:"you have to provide a search"}')
 }})
+app.get('/movies/read', (req, res) => {
+  
+  res.write('{status:200, data:\n')
+  for (let i=0; i<movies.length; i++){
+    my= JSON. stringify(movies[i]);
+    res.write(my+"\n");
+
+
+  }
+  res.write('}')
+  res.end();
+
+
+});
 
 
 //By-Date
@@ -131,3 +145,35 @@ app.get('/movies/read/id/:id?', (req, res) => {
   
   
   });
+
+
+
+
+app.get('/movies/add/title=:title?&year=:year?&rating=:rating?', function (req, res) {
+  let y=req.params.year.toString();
+  if (req.params.title && !isNaN(req.params.year)&& y.length===4  ){
+    if( req.params.rating){
+      movies.push({title:req.params.title , year:req.params.year , rating:req.params.rating })
+    }
+
+     else {
+      movies.push({title:req.params.title , year:req.params.year , rating:4})
+     }
+     
+    }
+    else {
+    res.send({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
+    }
+    res.write('{status:200, data:\n')
+    for (let i=0; i<movies.length; i++){
+      my= JSON. stringify(movies[i]);
+      res.write(my+"\n");
+  
+  
+    }
+    res.write('}')
+    res.end();
+  
+  
+  });
+ 
