@@ -177,3 +177,25 @@ app.get('/movies/add/title=:title?&year=:year?&rating=:rating?', function (req, 
   
   });
  
+
+  app.get('/movies/delete/id=:id?', function (req, res) {
+    if ( req.params.id< movies.length){
+      delete movies[req.params.id]
+     movies.splice(req.params.id)
+    
+        res.write('{status:200, data:\n')
+        for (let i=0; i<movies.length; i++){
+          my= JSON. stringify(movies[i]);
+          res.write(my+"\n");
+    
+        }
+        res.write('}')
+        res.end();
+      
+      }
+  
+      else {
+      res.send({status:404, error:true, message:'the movie <ID> does not exist'})
+      }
+      
+    });
