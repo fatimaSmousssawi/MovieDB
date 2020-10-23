@@ -52,15 +52,70 @@ app.get('/search=:s?', function (req, res) {
   res.send('{status:500, error:true, message:"you have to provide a search"}')
 }})
 
-app.get('/movies/read', (req, res) => {
+
+//By-Date
+app.get('/movies/read/by-date', (req, res) =>{
+    year=movies.sort(function(a, b) {
+      var yearOfa = a.year, yearOfb = b.year;
+      return yearOfa - yearOfb ;
+  })
+
+  
     res.write('{status:200, data:\n')
-    for (let i=0; i<movies.length; i++){
-      myJSON = JSON. stringify(movies[i]);
-      res.write(myJSON+"\n");
+    for (let i=0; i<year.length; i++){
+      my= JSON. stringify(year[i]);
+      res.write(my+"\n");
 
 
     }
     res.write('}')
     res.end();
 
+
+});
+
+//By-Rating
+app.get('/movies/read/by-rating', (req, res) =>{
+  rating =movies.sort(function(a, b) {
+    return b.rating - a.rating;
+  
   })
+
+
+  res.write('{status:200, data:\n')
+  for (let i=0; i<year.length; i++){
+    my= JSON. stringify(rating[i]);
+    res.write(my+"\n");
+
+
+  }
+  res.write('}')
+  res.end();
+
+
+});
+
+
+//By-Title
+app.get('/movies/read/by-title', (req, res) =>{
+  title =movies.sort(function(a, b) {
+    var titleA = a.title.toLowerCase(), titleB = b.title.toLowerCase();
+    if (titleA < titleB) return -1;
+    if (titleA > titleB) return 1;
+    return 0;
+  });
+  
+
+
+  res.write('{status:200, data:\n')
+  for (let i=0; i<year.length; i++){
+    my= JSON. stringify(title[i]);
+    res.write(my+"\n");
+
+
+  }
+  res.write('}')
+  res.end();
+
+
+});
