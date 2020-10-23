@@ -119,3 +119,15 @@ app.get('/movies/read/by-title', (req, res) =>{
 
 
 });
+
+
+app.get('/movies/read/id/:id?', (req, res) => {
+
+    if(req.params.id< movies.length){
+
+      res.send({status:200, data:movies[req.params.id]})
+    }else{res.send({status:404, error:true, message:'the movie title does not exist'})}
+  
+  
+  
+  });
