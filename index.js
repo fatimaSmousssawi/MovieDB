@@ -199,3 +199,24 @@ app.get('/movies/add/title=:title?&year=:year?&rating=:rating?', function (req, 
       }
       
     });
+
+    app.get('/movies/update/id=:id?&title=:title?', function (req, res) {
+      if ( req.params.id< movies.length){
+       movies[req.params.id].title=req.params.title
+      
+          res.write('{status:200, data:\n')
+          for (let i=0; i<movies.length; i++){
+            my= JSON. stringify(movies[i]);
+            res.write(my+"\n");
+      
+          }
+          res.write('}')
+          res.end();
+        
+        }
+    
+        else {
+        res.send({status:404, error:true, message:'the movie <ID> does not exist'})
+        }
+        
+      });
